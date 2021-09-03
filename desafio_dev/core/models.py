@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 import uuid
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.crypto import get_random_string
 
@@ -9,6 +10,17 @@ TRANSACTION_TYPE_CHOICES = [
     (1, 'Débito'), (2, 'Boleto'), (3, 'Financiamento'), (4, 'Crédito'), (5, 'Recebimento Empréstimo'), (6, 'Vendas'),
     (7, 'Recebimento TED'), (8, 'Recebimento DOC'), (9, 'Aluguel'),
 ]
+
+SUCCESS_UPLOAD = 'Dados injetados com sucesso.'
+
+ERROR_INVALID_DATA = 'Arquivo em formato inválido.'
+
+def cnab_validator(file):
+    try:
+        with open(file.name, 'r') as file:
+            [mount_dict(line) for line in file.readlines()]
+    except:  # noqa
+        raise ValidationError(ERROR_INVALID_DATA)
 
 
 def inject_data(file_name):
@@ -60,4 +72,8 @@ class Operation(BaseModel):
 
 
 class CNABModel(BaseModel):
-    file = models.FileField(verbose_name='Arquivo', upload_to=documents_directory_path)
+    file = models.FileField(verbose_name='Arquivo', upload_to=documents_directory_path, validators=[cnab_validator])
+
+    def save(self, *args, **kwargs):
+        inject_data(self.file.name)
+        return super().save(args, kwargs)

@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.conf import settings
-from django.core.files import File
 
 from desafio_dev.core.models import Operation, CNABModel, mount_dict, inject_data
 
