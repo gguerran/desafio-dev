@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 import uuid
 
 from django.db import models
@@ -8,6 +9,22 @@ TRANSACTION_TYPE_CHOICES = [
     (1, 'Débito'), (2, 'Boleto'), (3, 'Financiamento'), (4, 'Crédito'), (5, 'Recebimento Empréstimo'), (6, 'Vendas'),
     (7, 'Recebimento TED'), (8, 'Recebimento DOC'), (9, 'Aluguel'),
 ]
+
+
+def inject_data(file_name):
+    with open(file_name, 'r') as file:
+        data = [mount_dict(line) for line in file.readlines()]
+        objects = [Operation(**data) for data in data]
+        Operation.objects.bulk_create(objects)
+    return data
+
+
+def mount_dict(line):
+    return {
+        'transaction_type': line[0:1], 'date': datetime.strptime(line[1:9], '%Y%m%d'),
+        'value': float(line[9:17] + '.' + line[17:19]), 'cpf': line[19:30], 'card': line[30:42],
+        'hour': datetime.strptime(line[42:48], '%H%M%S'), 'owner': line[48:62], 'store': line[62:80]
+    }
 
 
 def documents_directory_path(instance, filename):
