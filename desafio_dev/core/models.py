@@ -11,6 +11,8 @@ TRANSACTION_TYPE_CHOICES = [
     (7, 'Recebimento TED'), (8, 'Recebimento DOC'), (9, 'Aluguel'),
 ]
 
+NATURE_TRANSACTION = {'addition': [1, 4, 5, 6, 7, 8], 'subtraction': [2, 3, 9]}
+
 SUCCESS_UPLOAD = 'Dados injetados com sucesso.'
 
 ERROR_INVALID_DATA = 'Arquivo em formato inválido.'
@@ -64,6 +66,14 @@ class Operation(BaseModel):
     hour = models.TimeField(verbose_name='hora')
     owner = models.CharField(verbose_name='dono da loja', max_length=14)
     store = models.CharField(verbose_name='nome da loja', max_length=19)
+
+    def __str__(self):
+        return self.store
+
+    def get_nature_transaction(self):
+        if self.transaction_type in NATURE_TRANSACTION['addition']:
+            return 'Entrada'
+        return 'Saída'
 
     class Meta:
         ordering = ['-created']

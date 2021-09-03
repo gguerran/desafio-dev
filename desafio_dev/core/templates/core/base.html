@@ -23,7 +23,27 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'core:upload' %}">Upload</a>
+                            <a class="nav-link {% if upload_page %} active {% endif %}" aria-current="page" href="{% url 'core:upload' %}">Upload</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link {% if list_page %} active {% endif %} dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Listar
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'core:list' %}">Todos</a></li>
+                                {% for store_ in stores %}
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item {% if store == store_ %} active {% endif %}" href="{% url 'core:list_by_store' store=store_ %}">
+                                            {{ store_ }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                                
+                            </ul>
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+{% load mask_cpf get_order_link %}
+{% block title %}| {% if store %}{{store}}{% else %}Listar{% endif %}{% endblock %}
+{% block content %}
+<div class="row">
+    <h3>
+        Lista  de Operações {% if store %} - {{ store }} {% endif %}
+    </h3>
+</div>
+<div class="row">
+    {% include '_partials/_number_elements.html' %}
+    <div class="col-md-12">
+        
+        <div class="table-responsive">
+            
+            <table class="table table-striped table-hover table-bordered">
+                <thead >
+                    
+                    <th><a href="{% get_order_link 'store' request.get_full_path request.path %}">Nome da loja</a></th>
+                    <th><a href="{% get_order_link 'transaction_type' request.get_full_path request.path %}">Tipo de transação</a></th>
+                    <th><a href="{% get_order_link 'date' request.get_full_path request.path %}">Data</a></th>
+                    <th><a href="{% get_order_link 'value' request.get_full_path request.path %}">Valor</a></th>
+                    <th><a href="{% get_order_link 'cpf' request.get_full_path request.path %}">CPF</a></th>
+                    <th><a href="{% get_order_link 'card' request.get_full_path request.path %}">Cartão</a></th>
+                    <th><a href="{% get_order_link 'hour' request.get_full_path request.path %}">Hora</a></th>
+                    <th><a href="{% get_order_link 'owner' request.get_full_path request.path %}">Dono da loja</a></th>
+                    <th>Natureza de transação</th>
+                </thead>
+                <tbody>
+                    {% for operation in operations %}
+                    <tr>
+                        <td>
+                            <a href="{% url 'core:list_by_store' store=operation.store %}" style="text-decoration: none;">
+                                {{ operation.store }}
+                            </a>
+                        </td>
+                        <td>{{ operation.get_transaction_type_display }}</td>
+                        <td>{{ operation.date }}</td>
+                        <td>{{ operation.value }}</td>
+                        <td>{% mask_cpf operation.cpf %}</td>
+                        <td>{{ operation.card }}</td>
+                        <td>{{ operation.hour }}</td>
+                        <td>{{ operation.owner }}</td>
+                        <td>{{ operation.get_nature_transaction }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% if total %}
+                <tfoot>
+                    <th colspan="8">Total</th>
+                    <th>{{ total }}</th>
+                </tfoot>
+                {% endif %}
+            </table>
+        </div>
+        {% include '_partials/_pagination.html' %}
+    </div>
+</div>
+{% endblock %}

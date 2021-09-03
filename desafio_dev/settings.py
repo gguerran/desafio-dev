@@ -43,6 +43,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Custom context processors
+                'desafio_dev.core.context_processors.stores',
             ],
         },
     },
