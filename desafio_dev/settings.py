@@ -16,6 +16,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Apps locais
+    'desafio_dev.core',
 ]
 
 MIDDLEWARE = [
