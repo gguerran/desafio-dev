@@ -8,7 +8,7 @@ from django.test import TestCase
 from model_mommy.mommy import make
 
 from desafio_dev.core.models import Operation, SUCCESS_UPLOAD, ERROR_INVALID_DATA
-from desafio_dev.core.api.serializers import CNABSerializer, OperationSerializer
+from desafio_dev.core.api.serializers import OperationSerializer
 from desafio_dev.core.api.views import OperationViewSet
 
 factory = APIRequestFactory()
@@ -63,7 +63,7 @@ class OperationViewSetTestCase(TestCase):
         view = OperationViewSet.as_view({'post': 'update'})
         response = view(request, pk=self.operations[0].id)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-    
+
     def test_upload_ok(self):
         data = {"file": self.file}
         request = factory.post('api/operation/upload', data)
@@ -72,7 +72,7 @@ class OperationViewSetTestCase(TestCase):
         response = view(request)
         self.assertEquals(response.data['resultado'], SUCCESS_UPLOAD)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    
+
     def test_upload_invalid(self):
         data = {"file": self.file_invalid}
         request = factory.post('api/operation/upload', data)

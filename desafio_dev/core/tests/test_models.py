@@ -1,14 +1,14 @@
 from django.test import TestCase
 from django.conf import settings
 
-from desafio_dev.core.models import Operation, CNABModel, mount_dict, inject_data
+from desafio_dev.core.models import Operation, inject_data
 
 
 class OperationModelTestCase(TestCase):
     def setUp(self):
         self.data = inject_data(settings.BASE_DIR / 'CNAB.txt')
         self.operations = Operation.objects.all()
-    
+
     def test_file_inject_count(self):
         self.assertEquals(len(self.data), self.operations.count())
 

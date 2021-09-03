@@ -14,7 +14,7 @@ class UploadOperationView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('core:upload')
     success_message = SUCCESS_UPLOAD
     model = CNABModel
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['upload_page'] = True

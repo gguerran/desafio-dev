@@ -17,6 +17,7 @@ SUCCESS_UPLOAD = 'Dados injetados com sucesso.'
 
 ERROR_INVALID_DATA = 'Arquivo em formato inválido.'
 
+
 def cnab_validator(file):
     try:
         with open(file.name, 'r') as file:

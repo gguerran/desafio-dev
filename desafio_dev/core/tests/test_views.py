@@ -55,7 +55,7 @@ class ListOperationViewTestCase(TestCase):
     def test_template_used(self):
         response = self.client.get(self.url)
         self.assertTemplateUsed(response, 'core/list.html')
-    
+
     def test_total_in_context(self):
         response = self.client.get(self.url)
         total = response.context['total']
