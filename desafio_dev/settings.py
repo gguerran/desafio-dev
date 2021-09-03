@@ -59,9 +59,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'desafio_dev.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': config("SQL_ENGINE"),
-        'NAME': BASE_DIR / config("SQL_NAME_DATABASE"),
+    "default": {
+        "ENGINE": config("SQL_ENGINE", default="django.db.backends.postgresql"),
+        "NAME": config("SQL_DATABASE", default="github-actions"),
+        "USER": config("SQL_USER", default="postgres"),
+        "PASSWORD": config("SQL_PASSWORD", default="postgres"),
+        "HOST": config("SQL_HOST", default="localhost"),
+        "PORT": config("SQL_PORT", default=5432),
     }
 }
 

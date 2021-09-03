@@ -1,3 +1,42 @@
+# Desafio programação - Upload CNAB
+
+Este repositório tem como finalidade cumprir as exigências do desafio imposto abaixo.
+
+**Instruções de execução:**
+
+- Você deve ter em sua máquina o Docker e o Docker Compose instalados.
+    - Links de download para o Linux (Ubuntu):
+
+        `https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04-pt`
+
+        `https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt`
+    - Caso estas versões não sejam compatíveis com sua máquina, consulte a documentação:
+        
+        `https://docs.docker.com/desktop/`
+
+
+1. Fazer o clone deste repositório:
+
+    `git clone https://github.com/gguerran/desafio-dev.git`
+
+2. Executar o setup.sh:
+
+    `sh setup.sh`
+
+- Após executar os passos acima, sua aplicação já está disponível para ser testada.
+
+**Instruções de uso:**
+
+- Na url padrão (`http://127.0.0.1:8000/`) você conseguirá testar o upload de arquivos CNAB's. Lembro-te que a validação do arquivo está sendo feita conforme o modelo do repositório.
+- Na url `/list` é possível listar todas as operações importadas através do arquivo inserido. No dropdown de listagem é possível ver todas as lojas diferentes que foram inseridas e filtrar por cada uma delas, assim como clicando em qualquer link da tabela. A tabela consege ordenar por cada uma das colunas com link, sendo que ao clicar 2 vezes no link ela inverte a ordenação.
+- Na url `/swagger` é possível consultar a documentação da API, assim como na url `/redoc`. O que você achar mais intuitivo.
+
+- É possível testar os endpoints listados na documentação através do software Insomina (`https://insomnia.rest/download`), onde você pode importar o aquivo `bycoders_insomnia_data.json`, onde o ambiente já está configurado para teste (com todos os endpoints válidos configurados e autenticação via Bearer Token já ajustada para a resposta da url de login).
+
+As biblitecas utilizadas neste projeto podem ser consultadas no arquivo `requirements.txt`, todas são OpenSource.
+
+A seguir as intruções usadas para a realização deste desafio:
+
 # Desafio programação - para vaga desenvolvedor
 
 Por favor leiam este documento do começo ao fim, com muita atenção.

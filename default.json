@@ -1,0 +1,36 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$260000$NnueLklZ6tyzSIVcS7wmKY$sTNS/O792ew76yscTNIJbAWGZsplgBOmsVzFRXzZHTk=",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "Super",
+        "last_name": "User",
+        "email": "admin@admin.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2021-09-03T02:37:10.843Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "oauth2_provider.application",
+    "pk": 1,
+    "fields": {
+        "client_id": "aCURKf5Dct1DjJZ5IUeBe3grH1aY5AWZhD9gLCLl",
+        "user": null,
+        "redirect_uris": "",
+        "client_type": "confidential",
+        "authorization_grant_type": "password",
+        "client_secret": "7RL51VShNOqzhQq3kbwvgvqB47JWuzfyHQ59imXDOC43xQ2y3MSZysZzdJf1uch7f9oGoaubgiJe2jg8zT66wo2RMHwKAcvJF7GuUlNZ0LV5Hx7R6V82NG3CHckTKyQQ",
+        "name": "",
+        "skip_authorization": false,
+        "created": "2021-09-03T02:37:40.492Z",
+        "updated": "2021-09-03T02:37:40.492Z",
+        "algorithm": ""
+    }
+}
+]
